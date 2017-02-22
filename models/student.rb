@@ -21,6 +21,24 @@ attr_reader :id
     @id = result['id'].to_i 
   end
 
+  def self.find(id)
+    sql = "SELECT * FROM students WHERE id= #{id};"
+    result = SqlRunner.run(sql).first
+    return Student.new(result)
+  end
+
+  def self.all
+    sql ="SELECT * FROM students;"
+    students = Student.get_many(sql)
+    return students
+  end
+
+  def self.get_many(sql)
+    result = SqlRunner.run(sql)
+    students = result.map {|student| Student.new(student)}
+    return students
+  end
+
   def self.delete_all
     sql = "DELETE FROM students"
     SqlRunner.run(sql)
