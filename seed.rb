@@ -3,21 +3,9 @@ require_relative ('./models/student.rb')
 require_relative('./db/sql_runner.rb')
 require_relative('./models/house.rb')
 
-harry = Student.new(
-{'first_name' => 'Harry', 'last_name' => 'Potter','house'=>'Griffindor', 'age' => 12}
-)
+Student.delete_all
+House.delete_all
 
-hermione = Student.new(
-{'first_name' => 'Hermione', 'last_name' => 'Granger','house'=>'Griffindor', 'age' => 11}
-)
-
-ron = Student.new(
-{'first_name' => 'Ron', 'last_name' => 'Weasley','house'=>'Griffindor', 'age' => 12}
-)
-
-harry.save
-hermione.save
-ron.save 
 
 griffindor = House.new({
   'name' => "Griffindor",
@@ -43,6 +31,22 @@ griffindor.save
 slytherin.save
 ravenclaw.save
 hufflepuff.save
+
+harry = Student.new(
+{'first_name' => 'Harry', 'last_name' => 'Potter','house_id'=>griffindor.id, 'age' => 12}
+)
+
+hermione = Student.new(
+{'first_name' => 'Hermione', 'last_name' => 'Granger','house_id'=>griffindor.id, 'age' => 11}
+)
+
+ron = Student.new(
+{'first_name' => 'Ron', 'last_name' => 'Weasley','house_id'=>griffindor.id, 'age' => 12}
+)
+
+harry.save
+hermione.save
+ron.save 
 
 binding.pry 
 nil
